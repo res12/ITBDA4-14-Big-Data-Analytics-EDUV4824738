@@ -1,0 +1,51 @@
+﻿                                 version                                  
+--------------------------------------------------------------------------
+ PostgreSQL 17.10 on x86_64-windows, compiled by msvc-19.44.35227, 64-bit
+(1 row)
+
+ total_loaded_programmes 
+-------------------------
+                      68
+(1 row)
+
+       faculty       | total_programmes | foundational_cnt | undergrad_cnt | postgrad_cnt | corporate_cnt | avg_nqf_level | avg_saqa_credits | avg_delivery_modes | online_pct 
+---------------------+------------------+------------------+---------------+--------------+---------------+---------------+------------------+--------------------+------------
+ Technology          |               21 |                2 |            12 |            7 |             0 |          6.62 |            194.3 |               2.81 |      100.0
+ Commerce            |               19 |                3 |             7 |            5 |             4 |          6.74 |            195.8 |               2.21 |      100.0
+ Humanities and Arts |               15 |                3 |             7 |            4 |             1 |          6.67 |            210.0 |               2.60 |      100.0
+ Business School     |                5 |                0 |             0 |            0 |             5 |          6.00 |             30.0 |               1.00 |      100.0
+ Applied Sciences    |                5 |                2 |             3 |            0 |             0 |          5.80 |            216.0 |               1.80 |       40.0
+ Law                 |                3 |                0 |             2 |            1 |             0 |          8.00 |            360.0 |               2.67 |      100.0
+(6 rows)
+
+          qualification_type          |     study_level_group     | intake_date_iso | avg_nqf | avg_years | programme_count | total_saqa_credits | pct_of_catalogue | nqf_imputed_cnt 
+--------------------------------------+---------------------------+-----------------+---------+-----------+-----------------+--------------------+------------------+-----------------
+ Corporate Training                   | Corporate & Short Courses | 2027-01-11      |     5.9 |      0.25 |              10 |                300 |             14.7 |              10
+ Postgraduate Certificates & Diplomas | Postgraduate              | 2027-01-15      |     8.0 |      1.00 |               1 |                120 |              1.5 |               0
+ Access                               | Foundational              | 2027-01-15      |     5.0 |      1.00 |               1 |                120 |              1.5 |               1
+ Doctorates                           | Postgraduate              | 2027-02-15      |    10.0 |      3.00 |               1 |                360 |              1.5 |               0
+ Masters                              | Postgraduate              | 2027-02-15      |     9.0 |      2.00 |               5 |               1200 |              7.4 |               0
+ Honours                              | Postgraduate              | 2027-02-15      |     8.0 |      1.00 |               8 |                960 |             11.8 |               0
+ Postgraduate Certificates & Diplomas | Postgraduate              | 2027-02-15      |     8.0 |      1.00 |               2 |                240 |              2.9 |               0
+ Degree                               | Undergraduate             | 2027-02-15      |     7.0 |      3.05 |              21 |               7680 |             30.9 |               0
+ Higher Certificate                   | Undergraduate             | 2027-02-15      |     5.0 |      1.00 |              10 |               1200 |             14.7 |               0
+ Pre-Degree                           | Foundational              | 2027-02-15      |     5.0 |      1.00 |               5 |                600 |              7.4 |               5
+ Access                               | Foundational              | 2027-02-15      |     5.0 |      1.00 |               4 |                480 |              5.9 |               4
+(11 rows)
+
+       faculty       | faculty_nqf_rank | programme_id |                              programme_title_clean                              | qualification_type | nqf_level | estimated_saqa_credits | delivery_mode_count 
+---------------------+------------------+--------------+---------------------------------------------------------------------------------+--------------------+-----------+------------------------+---------------------
+ Applied Sciences    |                1 | EDV-027      | Bachelor of Science in Biomedicine                                              | Degree             |         7 |                    360 |                   1
+ Applied Sciences    |                2 | EDV-028      | Bachelor of Science in Biotechnology Management                                 | Degree             |         7 |                    360 |                   1
+ Business School     |                1 | EDV-048      | Management Development Programme                                                | Corporate Training |         6 |                     30 |                   1
+ Business School     |                2 | EDV-064      | Short Course in Managing Finances                                               | Corporate Training |         6 |                     30 |                   1
+ Commerce            |                1 | EDV-035      | Doctor of Philosophy in Commerce                                                | Doctorates         |        10 |                    360 |                   2
+ Commerce            |                2 | EDV-049      | Master of Commerce in Business Management                                       | Masters            |         9 |                    240 |                   2
+ Humanities and Arts |                1 | EDV-002      | Bachelor of Arts Honours in Graphic Design                                      | Honours            |         8 |                    120 |                   2
+ Humanities and Arts |                2 | EDV-003      | Bachelor of Arts Honours in Industrial and Organisational Psychology            | Honours            |         8 |                    120 |                   2
+ Law                 |                1 | EDV-050      | Master of Laws in Commercial Law                                                | Masters            |         9 |                    240 |                   2
+ Law                 |                2 | EDV-020      | Bachelor of Laws                                                                | Degree             |         8 |                    480 |                   3
+ Technology          |                1 | EDV-051      | Master of Science in Information Technology: Big Data and Business Intelligence | Masters            |         9 |                    240 |                   2
+ Technology          |                2 | EDV-052      | Master of Science in Information Technology: Cyber Security and Data Protection | Masters            |         9 |                    240 |                   2
+(12 rows)
+

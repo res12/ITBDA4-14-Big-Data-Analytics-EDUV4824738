@@ -1,0 +1,13 @@
+"faculty","faculty_nqf_rank","programme_id","programme_title_clean","qualification_type","nqf_level","estimated_saqa_credits","delivery_mode_count"
+"Applied Sciences",1,"EDV-027","Bachelor of Science in Biomedicine","Degree",7,360,1
+"Applied Sciences",2,"EDV-028","Bachelor of Science in Biotechnology Management","Degree",7,360,1
+"Business School",1,"EDV-048","Management Development Programme","Corporate Training",6,30,1
+"Business School",2,"EDV-064","Short Course in Managing Finances","Corporate Training",6,30,1
+"Commerce",1,"EDV-035","Doctor of Philosophy in Commerce","Doctorates",10,360,2
+"Commerce",2,"EDV-049","Master of Commerce in Business Management","Masters",9,240,2
+"Humanities and Arts",1,"EDV-002","Bachelor of Arts Honours in Graphic Design","Honours",8,120,2
+"Humanities and Arts",2,"EDV-003","Bachelor of Arts Honours in Industrial and Organisational Psychology","Honours",8,120,2
+"Law",1,"EDV-050","Master of Laws in Commercial Law","Masters",9,240,2
+"Law",2,"EDV-020","Bachelor of Laws","Degree",8,480,3
+"Technology",1,"EDV-051","Master of Science in Information Technology: Big Data and Business Intelligence","Masters",9,240,2
+"Technology",2,"EDV-052","Master of Science in Information Technology: Cyber Security and Data Protection","Masters",9,240,2

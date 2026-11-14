@@ -1,0 +1,15 @@
+# PostgreSQL local cluster binary files (regenerated locally on runtime)
+pgdata/
+outputs/pg17.log
+
+# Large local submission archive (all source artifacts already tracked cleanly in repo)
+deliverables/*.zip
+
+# OS / R / Python temporary files
+.Rhistory
+.RData
+.Ruserdata
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db

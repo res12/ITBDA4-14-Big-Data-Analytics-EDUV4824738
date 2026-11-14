@@ -1,0 +1,8 @@
+"doc_name","total_matches","exact_word_matches","coordinates"
+"doc1.txt",3,1,"(Row 1, CharCol 64, WordCol 10); (Row 3, CharCol 11, WordCol 3); (Row 3, CharCol 95, WordCol 14)"
+"doc2.txt",5,2,"(Row 1, CharCol 57, WordCol 9); (Row 3, CharCol 32, WordCol 6); (Row 33, CharCol 24, WordCol 5); (Row 58, CharCol 5, WordCol 2); (Row 58, CharCol 81, WordCol 13)"
+"doc3.txt",9,6,"(Row 1, CharCol 38, WordCol 8); (Row 3, CharCol 7, WordCol 2); (Row 5, CharCol 7, WordCol 2); (Row 40, CharCol 146, WordCol 22); (Row 46, CharCol 7, WordCol 2); (Row 48, CharCol 112, WordCol 20); (Row 50, CharCol 142, WordCol 23); (Row 52, CharCol 86, WordCol 15); (Row 54, CharCol 44, WordCol 6)"
+"doc4.txt",0,0,"None (0 matches)"
+"doc5.txt",5,3,"(Row 1, CharCol 62, WordCol 12); (Row 3, CharCol 88, WordCol 14); (Row 23, CharCol 121, WordCol 21); (Row 38, CharCol 27, WordCol 6); (Row 48, CharCol 217, WordCol 31)"
+"doc6.txt",0,0,"None (0 matches)"
+"doc7.txt",0,0,"None (0 matches)"

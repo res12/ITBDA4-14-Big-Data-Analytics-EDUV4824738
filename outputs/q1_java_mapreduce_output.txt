@@ -1,0 +1,33 @@
+MapReduce Dynamic Keyword Search Output | Keyword='africa' (Case-Insensitive)
+====================================================================================
+doc1.txt	TotalMatches=3
+    -> Row=1, CharCol=64, WordCol=10, Token='Africa', ExactWord=true
+    -> Row=3, CharCol=11, WordCol=3, Token='African', ExactWord=false
+    -> Row=3, CharCol=95, WordCol=14, Token='African', ExactWord=false
+doc2.txt	TotalMatches=5
+    -> Row=1, CharCol=57, WordCol=9, Token='Africa', ExactWord=true
+    -> Row=3, CharCol=32, WordCol=6, Token='African', ExactWord=false
+    -> Row=33, CharCol=24, WordCol=5, Token='Africa', ExactWord=true
+    -> Row=58, CharCol=5, WordCol=2, Token='African', ExactWord=false
+    -> Row=58, CharCol=81, WordCol=13, Token='Africa’s', ExactWord=false
+doc3.txt	TotalMatches=9
+    -> Row=1, CharCol=38, WordCol=8, Token='Africa', ExactWord=true
+    -> Row=3, CharCol=7, WordCol=2, Token='Africa’s', ExactWord=false
+    -> Row=5, CharCol=7, WordCol=2, Token='Africa’s', ExactWord=false
+    -> Row=40, CharCol=146, WordCol=22, Token='Africa', ExactWord=true
+    -> Row=46, CharCol=7, WordCol=2, Token='Africa', ExactWord=true
+    -> Row=48, CharCol=112, WordCol=20, Token='African', ExactWord=false
+    -> Row=50, CharCol=142, WordCol=23, Token='Africa', ExactWord=true
+    -> Row=52, CharCol=86, WordCol=15, Token='Africa', ExactWord=true
+    -> Row=54, CharCol=44, WordCol=6, Token='Africa', ExactWord=true
+doc4.txt	TotalMatches=0
+doc5.txt	TotalMatches=5
+    -> Row=1, CharCol=62, WordCol=12, Token='Africa', ExactWord=true
+    -> Row=3, CharCol=88, WordCol=14, Token='Africa', ExactWord=true
+    -> Row=23, CharCol=121, WordCol=21, Token='Africa', ExactWord=true
+    -> Row=38, CharCol=27, WordCol=6, Token='Africa’s', ExactWord=false
+    -> Row=48, CharCol=217, WordCol=31, Token='African', ExactWord=false
+doc6.txt	TotalMatches=0
+doc7.txt	TotalMatches=0
+====================================================================================
+Grand Total Occurrences Across Corpus: 22
