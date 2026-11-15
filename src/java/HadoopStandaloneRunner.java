@@ -33,7 +33,13 @@ public class HadoopStandaloneRunner {
             while (m.find()) {
                 int charCol = m.start() + 1;
                 String before = line.substring(0, m.start());
-                int wordCol = before.trim().isEmpty() ? 1 : before.trim().split("\\s+").length + 1;
+                int wordCol = 1;
+                boolean insideWord = false;
+                for (int i = 0; i < before.length(); i++) {
+                    if (Character.isWhitespace(before.charAt(i))) insideWord = false;
+                    else if (!insideWord) { wordCol++; insideWord = true; }
+                }
+                if (insideWord) wordCol--;
                 // Extract full word surrounding match for reporting clarity
                 int wStart = m.start();
                 while (wStart > 0 && !Character.isWhitespace(line.charAt(wStart - 1))) wStart--;

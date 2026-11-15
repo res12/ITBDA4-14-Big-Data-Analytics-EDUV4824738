@@ -42,6 +42,9 @@ public class KeywordSearchDriver {
         job.setOutputValueClass(Text.class);
 
         FileInputFormat.addInputPath(job, new Path(args[0]));
+        // The mapper counts rows from 1, so keep each document in one input split.
+        // For very large individual files, use a custom line-number input format instead.
+        FileInputFormat.setMinInputSplitSize(job, Long.MAX_VALUE);
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
         System.exit(job.waitForCompletion(true) ? 0 : 1);

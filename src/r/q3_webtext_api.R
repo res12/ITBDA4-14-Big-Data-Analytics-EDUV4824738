@@ -22,7 +22,10 @@ suppressPackageStartupMessages({
   library(scales)
 })
 
-base_dir <- normalizePath("C:/Users/resego.ngwenya/.gemini/antigravity/scratch/ITBDA4-14_Project", winslash = "/")
+script_arg <- grep("^--file=", commandArgs(), value = TRUE)
+base_dir <- if (length(script_arg)) {
+  normalizePath(file.path(dirname(sub("^--file=", "", script_arg[1])), "../.."), winslash = "/")
+} else normalizePath(".", winslash = "/")
 data_dir <- file.path(base_dir, "data")
 out_dir  <- file.path(base_dir, "outputs")
 
@@ -42,14 +45,15 @@ robots_resp <- tryCatch(httr::GET(robots_url, httr::user_agent(ua_string), httr:
 robots_txt <- if (!is.null(robots_resp) && httr::status_code(robots_resp) == 200) {
   httr::content(robots_resp, as = "text", encoding = "UTF-8")
 } else {
-  "User-agent: *\nAllow: /"
+  warning("robots.txt could not be fetched; using a local cached article for analysis only")
+  "robots.txt unavailable"
 }
 cat("--- robots.txt Compliance Preview ---\n")
 cat(paste(head(strsplit(robots_txt, "\n")[[1]], 8), collapse = "\n"), "\n\n")
 
 # Fetch article HTML (with local fallback cache for full reproducibility)
 html_cache <- file.path(data_dir, "eurac_article_cached.html")
-page_resp <- tryCatch(httr::GET(target_url, httr::user_agent("Mozilla/5.0"), httr::timeout(20)), error = function(e) NULL)
+page_resp <- tryCatch(httr::GET(target_url, httr::user_agent(ua_string), httr::timeout(20)), error = function(e) NULL)
 if (!is.null(page_resp) && httr::status_code(page_resp) == 200) {
   raw_html <- httr::content(page_resp, as = "text", encoding = "UTF-8")
   writeLines(raw_html, html_cache, useBytes = TRUE)
@@ -286,7 +290,7 @@ p3_1 <- ggplot(score_long, aes(x = factor(sentence_id), y = Score, fill = select
   labs(
     title = "Text Summarisation Comparison: Sentence Importance Across Article Narrative",
     subtitle = "Top 5 sentences selected independently by Graph-Based TextRank and TF-IDF Centroid Scoring (Eurac Research Article)",
-    x = "Sentence Position Index in Original Article (S1 to S22)",
+    x = sprintf("Sentence Position in Original Article (S1 to S%d)", nrow(sentences_df)),
     y = "Normalised Importance Score (0 to 1)"
   ) +
   theme_minimal(base_size = 11) +

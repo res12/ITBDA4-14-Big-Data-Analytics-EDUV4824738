@@ -7,8 +7,4 @@
         <name>mapreduce.job.reduces</name>
         <value>1</value>
     </property>
-    <property>
-        <name>search.keyword</name>
-        <value>africa</value>
-    </property>
 </configuration>

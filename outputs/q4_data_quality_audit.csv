@@ -1,7 +1,7 @@
 "anomaly_category","affected_records","total_records","pct_affected"
 "Missing data-learning-mode attribute (NA)",1,68,1.5
-"Missing explicit NQF level (Access / Pre-Degree / Corporate)",20,68,29.4
-"Missing explicit duration in years (Access / Corporate)",15,68,22.1
+"NQF level unavailable on listing card (Access / Pre-Degree / Corporate)",20,68,29.4
+"Duration unavailable on listing card (Access / Corporate)",15,68,22.1
 "Truncated descriptions ending with ellipsis (...)",67,68,98.5
 "Unparsed date prefix ('Start date: ...')",68,68,100
 "Unicode en/em dashes requiring ASCII normalisation",6,68,8.8

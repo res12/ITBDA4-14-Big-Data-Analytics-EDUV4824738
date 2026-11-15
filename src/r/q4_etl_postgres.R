@@ -16,7 +16,10 @@ suppressPackageStartupMessages({
   library(RPostgres)
 })
 
-base_dir <- "C:/Users/resego.ngwenya/.gemini/antigravity/scratch/ITBDA4-14_Project"
+script_arg <- grep("^--file=", commandArgs(), value = TRUE)
+base_dir <- if (length(script_arg)) {
+  normalizePath(file.path(dirname(sub("^--file=", "", script_arg[1])), "../.."), winslash = "/")
+} else normalizePath(".", winslash = "/")
 data_dir <- file.path(base_dir, "data")
 out_dir  <- file.path(base_dir, "outputs")
 sql_dir  <- file.path(base_dir, "src", "sql")
@@ -131,8 +134,8 @@ write.csv(raw_df, file.path(data_dir, "q4_eduvos_programmes_raw.csv"), row.names
 audit_df <- data.frame(
   anomaly_category = c(
     "Missing data-learning-mode attribute (NA)",
-    "Missing explicit NQF level (Access / Pre-Degree / Corporate)",
-    "Missing explicit duration in years (Access / Corporate)",
+    "NQF level unavailable on listing card (Access / Pre-Degree / Corporate)",
+    "Duration unavailable on listing card (Access / Corporate)",
     "Truncated descriptions ending with ellipsis (...)",
     "Unparsed date prefix ('Start date: ...')",
     "Unicode en/em dashes requiring ASCII normalisation",

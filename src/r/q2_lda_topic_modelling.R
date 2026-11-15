@@ -18,7 +18,10 @@ suppressPackageStartupMessages({
   library(scales)
 })
 
-base_dir <- normalizePath("C:/Users/resego.ngwenya/.gemini/antigravity/scratch/ITBDA4-14_Project", winslash = "/")
+script_arg <- grep("^--file=", commandArgs(), value = TRUE)
+base_dir <- if (length(script_arg)) {
+  normalizePath(file.path(dirname(sub("^--file=", "", script_arg[1])), "../.."), winslash = "/")
+} else normalizePath(".", winslash = "/")
 news_zip <- file.path(base_dir, "data", "news.zip")
 news_dir <- file.path(base_dir, "data", "sa_news")
 out_dir  <- file.path(base_dir, "outputs")
@@ -94,7 +97,7 @@ rownames(dtm) <- news_df$file_name
 cat(sprintf("\nDTM Dimensions: %d documents x %d unique denoised terms (Sparsity: %.1f%%)\n",
             nrow(dtm), ncol(dtm), 100 * (1 - length(dtm$v) / (nrow(dtm) * ncol(dtm)))))
 
-# Evaluate perplexity / semantic separation across k = 3, 4, 5 using Gibbs sampling
+# Fit four exploratory topics with a fixed seed for reproducibility.
 set.seed(2026)
 k_topics <- 4L
 top_k_words <- 10L

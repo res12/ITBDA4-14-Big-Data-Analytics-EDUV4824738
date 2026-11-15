@@ -18,7 +18,10 @@ search_keyword <- if (length(args) >= 1 && nzchar(trimws(args[1]))) {
   Sys.getenv("SEARCH_KEYWORD", unset = "africa")
 }
 
-base_dir <- normalizePath("C:/Users/resego.ngwenya/.gemini/antigravity/scratch/ITBDA4-14_Project", winslash = "/")
+script_arg <- grep("^--file=", commandArgs(), value = TRUE)
+base_dir <- if (length(script_arg)) {
+  normalizePath(file.path(dirname(sub("^--file=", "", script_arg[1])), "../.."), winslash = "/")
+} else normalizePath(".", winslash = "/")
 docs_dir <- file.path(base_dir, "data", "map_reduce_test_docs")
 out_dir  <- file.path(base_dir, "outputs")
 
@@ -41,7 +44,6 @@ mr_config <- list(
 keyword_mapper <- function(file_path, config) {
   doc_name <- basename(file_path)
   lines <- readLines(file_path, warn = FALSE, encoding = "UTF-8")
-  kw_regex <- paste0("(?i)", stringr::fixed(config$search.keyword))
   # Build exact case-insensitive literal regex
   kw_escaped <- stringr::str_replace_all(config$search.keyword, "([\\W])", "\\\\\\1")
   pat <- stringr::regex(kw_escaped, ignore_case = !config$search.case_sensitive)
@@ -54,7 +56,8 @@ keyword_mapper <- function(file_path, config) {
       for (m_idx in seq_len(nrow(locs))) {
         char_col <- locs[m_idx, "start"]
         prefix <- if (char_col > 1) substr(line_txt, 1, char_col - 1) else ""
-        word_col <- if (trimws(prefix) == "") 1L else length(strsplit(trimws(prefix), "\\s+")[[1]]) + 1L
+        prior_tokens <- stringr::str_count(prefix, "\\S+(?=\\s)")
+        word_col <- prior_tokens + 1L
         # Extract full whitespace-delimited token around match
         tokens <- strsplit(line_txt, "\\s+")[[1]]
         tok_str <- if (word_col <= length(tokens)) tokens[word_col] else config$search.keyword

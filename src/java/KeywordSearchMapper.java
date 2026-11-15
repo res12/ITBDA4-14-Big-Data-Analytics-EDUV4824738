@@ -45,8 +45,18 @@ public class KeywordSearchMapper extends Mapper<LongWritable, Text, Text, Text> 
 
         while (matcher.find()) {
             int charCol = matcher.start() + 1; // 1-based character column
-            String prefix = line.substring(0, matcher.start()).trim();
-            int wordCol = prefix.isEmpty() ? 1 : prefix.split("\\s+").length + 1;
+            String prefix = line.substring(0, matcher.start());
+            int wordCol = 1;
+            boolean insideWord = false;
+            for (int i = 0; i < prefix.length(); i++) {
+                if (Character.isWhitespace(prefix.charAt(i))) {
+                    insideWord = false;
+                } else if (!insideWord) {
+                    wordCol++;
+                    insideWord = true;
+                }
+            }
+            if (insideWord) wordCol--;
             String matchedToken = line.substring(matcher.start(), matcher.end());
 
             outKey.set(currentFileName);

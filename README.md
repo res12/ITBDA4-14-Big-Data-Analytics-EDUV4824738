@@ -36,9 +36,9 @@
 ## Executive Summary of Analytical Results (Questions 1–4)
 
 ### Question 1 (25 Marks): Dynamic Distributed MapReduce Keyword Search
-- **Architecture:** Implemented in both Apache Hadoop Java (`KeywordSearchMapper`, `KeywordSearchReducer`, `KeywordSearchDriver` + `core-site.xml`, `hdfs-site.xml`, `mapred-site.xml` + standalone JDK 21 executor `HadoopStandaloneRunner`) and R (`src/r/q1_mapreduce_keyword_search.R`).
+- **Architecture:** The R MapReduce-style program and standalone Java runner were tested locally. Hadoop Mapper, Reducer, Driver and XML files are provided as a cluster implementation; no Hadoop cluster execution is claimed.
 - **Dynamic Configuration:** Target keyword is passed via runtime CLI argument / Hadoop `Configuration` (`search.keyword`) and compiled with `Pattern.CASE_INSENSITIVE`.
-- **Demonstration Result (`keyword = "africa"`):** Identified **22 case-insensitive occurrences** across 4 of the 7 documents (`doc1.txt`: 3, `doc2.txt`: 5, `doc3.txt`: 9, `doc5.txt`: 5; `doc4.txt`/`doc6.txt`/`doc7.txt`: 0), reporting exact 1-based row indices, character offsets, and word column indices (`12` exact whole-word + `10` inflected forms such as `African` / `Africa’s`).
+- **Demonstration Result (`keyword = "africa"`):** Found **22 case-insensitive substring matches** across 4 of the 7 documents (`doc1.txt`: 3, `doc2.txt`: 5, `doc3.txt`: 9, `doc5.txt`: 5; the others: 0), reporting 1-based row, character and word positions. Twelve are exact words; ten occur within longer or possessive forms.
 
 ### Question 2 (20 Marks): Latent Dirichlet Allocation (LDA) Topic Modelling
 - **Preprocessing (`tm`):** Loaded all 10 articles from `news.zip` into `data.frame(file_name, content)` and removed between 41.5% and 49.8% noise per file, yielding a `10 x 1,086` Document-Term Matrix (87.5% sparsity).
@@ -50,15 +50,15 @@
 - **Visualisations:** Multi-topic Beta bar grid (`q2_lda_top_terms_faceted.png`), Document-Topic Gamma heatmap (`q2_lda_doc_topic_heatmap.png`), and 4-panel word clouds (`q2_lda_topic_wordclouds.png`).
 
 ### Question 3 (30 Marks): WebText API & Extractive Text Summarisation
-- **Fair-Use Extraction (`rvest` / `httr`):** Scraped *Can language become environmental data?* (Eurac Research, CC BY 4.0) with transparent user-agent headers into a structured R object (`19 sentences`, `511 raw words -> 313 clean tokens`, `38.7%` noise stripped).
+- **Article extraction (`rvest` / `httr`):** Retrieved *Can language become environmental data?* (Eurac Research, CC BY 4.0) into a named R list (`19 sentences`, `511 raw words -> 313 clean tokens`, `38.7%` removed by preprocessing). The script records whether the text was fetched live or read from its local cache.
 - **Dual Extractive Summarisation:**
   - **Graph TextRank (`igraph`):** Selected Sentences 4, 6, 8, 14, 19 (`177 / 511` words, 65.4% compression, 46.7% top-15 TF-IDF keyword coverage).
   - **TF-IDF Weighted Scoring:** Selected Sentences 6, 7, 10, 17, 18 (`84 / 511` words, 83.6% compression, 93.3% top-15 TF-IDF keyword coverage). Sentence 6 was jointly prioritised by both models.
 
 ### Question 4 (25 Marks): End-to-End ETL in R & PostgreSQL 17
-- **Use Case & Extraction (`4.1`):** Scraped **68 live Eduvos qualification cards** from `https://www.eduvos.com/qualifications/` (`robots.txt` `Allow: /`) using CSS selectors and regex, capturing authentic data anomalies: 1 missing `data-learning-mode` attribute, 20 records lacking explicit NQF tiers, 15 lacking explicit durations, 67 truncated ellipsis descriptions, 68 unparsed `"Start date: ..."` strings, 6 Unicode dashes, and 2 misplaced Pre-Degree programmes (`Information Technology` and `Science`) listed under `Humanities and Arts`.
-- **Transformation & Imputation (`4.2`):** Applied Unicode/whitespace denoising, corrected the 2 faculty misclassifications, parsed ISO `YYYY-MM-DD` intake dates, deterministically imputed all missing NQF levels, durations, SAQA credits, and delivery modes (`0` remaining NAs), and exported `data/q4_eduvos_programmes_cleaned.csv`.
-- **PostgreSQL 17 Analytics (`4.3`):** Loaded all 68 cleaned rows into `eduvos_programmes` (`itbda4_etl_db`) and executed three SQL investigations: Faculty portfolio & online accessibility aggregation (`Technology` leads with 21 programmes at 100% online availability; `Law` leads academic depth at NQF 8.00 / 360 credits), Qualification tier & intake cohort distribution (`2027-02-15` accounts for 56 of 68 programmes), and `DENSE_RANK()` flagship identification per faculty.
+- **Use Case & Extraction (`4.1`):** Parsed **68 Eduvos qualification cards** from a cached copy of `https://www.eduvos.com/qualifications/` using CSS selectors and regex. The listing had one missing study-mode attribute, 67 truncated descriptions and dates requiring parsing. NQF and duration values for 20 and 15 cards respectively were inferred from qualification types because the listing cards did not supply them.
+- **Transformation & Imputation (`4.2`):** Normalised text, corrected two faculty labels, parsed intake dates and filled selected missing values with documented assumptions. The `estimated_saqa_credits` field is a duration-based proxy, **not official SAQA credit data**. Imputation flags remain in `data/q4_eduvos_programmes_cleaned.csv`.
+- **PostgreSQL 17 Analytics (`4.3`):** Loaded all 68 cleaned rows into `eduvos_programmes` (`itbda4_etl_db`) and ran three SQL investigations covering faculty counts and study modes, qualification types and listed intake dates, and within-faculty ranking. The 15 February 2027 date appears on 56 of 68 saved records.
 
 ---
 
