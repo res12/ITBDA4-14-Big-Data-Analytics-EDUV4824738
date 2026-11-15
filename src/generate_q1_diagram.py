@@ -8,7 +8,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
-OUT_PATH = Path(r"C:\Users\resego.ngwenya\.gemini\antigravity\scratch\ITBDA4-14_Project\outputs\q1_mapreduce_logical_diagram.png")
+OUT_PATH = Path(__file__).resolve().parents[1] / "outputs" / "q1_mapreduce_logical_diagram.png"
 
 NAVY = "#1B365D"
 BLUE = "#2563EB"

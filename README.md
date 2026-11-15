@@ -64,6 +64,8 @@
 
 ## Reproducibility Guide
 
+Keep the project folder in Documents and run the commands below from its root. The R scripts resolve the project from their own location. The notebooks resolve it from either the project root or the `notebooks` folder; no personal absolute path is required.
+
 ```powershell
 # 1. Question 1 (Java MapReduce + R implementation)
 javac src/java/HadoopStandaloneRunner.java
