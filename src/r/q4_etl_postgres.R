@@ -261,11 +261,11 @@ write.csv(clean_df, file.path(out_dir,  "q4_eduvos_programmes_cleaned.csv"), row
 # ------------------------------------------------------------------------------
 con <- dbConnect(
   RPostgres::Postgres(),
-  host     = "127.0.0.1",
-  port     = 5433L,
-  user     = "postgres",
-  password = "",
-  dbname   = "itbda4_etl_db"
+  host     = Sys.getenv("ITBDA_PG_HOST", "127.0.0.1"),
+  port     = as.integer(Sys.getenv("ITBDA_PG_PORT", "5433")),
+  user     = Sys.getenv("ITBDA_PG_USER", "postgres"),
+  password = Sys.getenv("ITBDA_PG_PASSWORD", ""),
+  dbname   = Sys.getenv("ITBDA_PG_DB", "itbda4_etl_db")
 )
 on.exit(dbDisconnect(con), add = TRUE)
 

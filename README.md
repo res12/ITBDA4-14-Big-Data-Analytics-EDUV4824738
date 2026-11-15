@@ -74,7 +74,10 @@ Rscript src/r/q1_mapreduce_keyword_search.R africa
 Rscript src/r/q2_lda_topic_modelling.R
 Rscript src/r/q3_webtext_api.R
 
-# 3. Question 4 (PostgreSQL 17 on port 5433 -> R ETL -> psql verification)
+# 3. Question 4 (create a local PostgreSQL 17 database first)
+# Default connection: 127.0.0.1:5433, postgres, database itbda4_etl_db.
+# Override with ITBDA_PG_HOST, ITBDA_PG_PORT, ITBDA_PG_USER,
+# ITBDA_PG_PASSWORD and ITBDA_PG_DB as needed.
 Rscript src/r/q4_etl_postgres.R
 psql -h 127.0.0.1 -p 5433 -U postgres -d itbda4_etl_db -f src/sql/q4_analytics.sql
 ```
